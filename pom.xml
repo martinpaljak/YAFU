@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.github.martinpaljak</groupId>
         <artifactId>metacard</artifactId>
-        <version>24.11.17</version>
+        <version>25.03.11</version>
     </parent>
     <packaging>pom</packaging>
     <artifactId>fido2-toolbox</artifactId>
@@ -14,7 +14,7 @@
     <repositories>
         <repository>
             <id>javacard-pro</id>
-            <url>https://javacard.pro/maven/</url>
+            <url>https://mvn.javacard.pro/maven/</url>
         </repository>
     </repositories>
     <modules>
