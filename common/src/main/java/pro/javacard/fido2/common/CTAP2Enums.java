@@ -108,7 +108,15 @@ public class CTAP2Enums {
         uvModality(0x12),
         certifications(0x13),
         remainingDiscoverableCredentials(0x14),
-        vendorPrototypeConfigCommands(0x15);
+        vendorPrototypeConfigCommands(0x15),
+        attestationFormats(0x16),
+        uvCountSinceLastPinEntry(0x17),
+        longTouchForReset(0x18),
+        encIdentifier(0x19),
+        transportsForReset(0x1A),
+        pinComplexityPolicy(0x1B),
+        pinComplexityPolicyURL(0x1C),
+        maxPINLength(0x1D);
         private final byte v;
 
         GetInfoResponseParameter(int v) {
