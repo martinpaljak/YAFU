@@ -37,7 +37,8 @@ public class USBTransport implements CTAP2Transport {
     private final CallbackHandler callbackHandler;
 
     private DefaultTransportMetadata metadata;
-    private boolean hasWink = false;
+    // XXX: volatile to please spotbugs
+    private volatile boolean hasWink = false;
 
     private byte[] channelID;
 
