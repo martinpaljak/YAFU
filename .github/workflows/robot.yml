@@ -15,7 +15,7 @@ jobs:
     name: Build and deploy
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-tags: true
           fetch-depth: 0
@@ -28,7 +28,7 @@ jobs:
         if: (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/next' || github.ref == 'refs/heads/main')
         run: ssh-keyscan mvn.javacard.pro >> ~/.ssh/known_hosts
       - name: Setup java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: zulu
@@ -41,7 +41,7 @@ jobs:
       - name: Release
         if: startsWith(github.ref, 'refs/tags/v')
         id: create_release
-        uses: softprops/action-gh-release@v2.2.2
+        uses: softprops/action-gh-release@v2.4.2
         with:
           files: |
             tool/target/yafu.jar
