@@ -13,7 +13,7 @@
         <dependency>
             <groupId>com.github.martinpaljak</groupId>
             <artifactId>apdu4j-pcsc</artifactId>
-            <version>25.03.11</version>
+            <version>25.11.24.1</version>
         </dependency>
         <dependency>
             <groupId>org.hid4java</groupId>
@@ -28,6 +28,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>2.0.17</version>
         </dependency>
     </dependencies>
 </project>

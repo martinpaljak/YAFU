@@ -2,21 +2,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.github.martinpaljak</groupId>
-        <artifactId>metacard</artifactId>
-        <version>25.06.07.1</version>
-    </parent>
     <packaging>pom</packaging>
+    <groupId>com.github.martinpaljak</groupId>
     <artifactId>fido2-toolbox</artifactId>
     <version>24.11.25-SNAPSHOT</version>
     <name>FIDO2/U2F/CTAP2 toolbox for Java/JavaCard</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- GH Actions fails sometimes on first try -->
+        <maven.wagon.http.retryHandler.count>2</maven.wagon.http.retryHandler.count>
+        <project.build.outputTimestamp>2025-10-19T10:45:58Z</project.build.outputTimestamp>
+    </properties>
     <repositories>
         <repository>
             <id>javacard-pro</id>
             <url>https://mvn.javacard.pro/maven/</url>
         </repository>
     </repositories>
+    <!-- Default is publishing to private Maven repo on mvn.javacard.pro -->
+    <distributionManagement>
+        <repository>
+            <id>javacard</id>
+            <url>scpexe://mvn@mvn.javacard.pro/home/mvn/maven/</url>
+        </repository>
+        <snapshotRepository>
+            <id>javacard</id>
+            <url>scpexe://mvn@mvn.javacard.pro/home/mvn/maven/SNAPSHOTS</url>
+        </snapshotRepository>
+    </distributionManagement>
     <modules>
         <module>common</module>
         <module>transports</module>
@@ -27,6 +41,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.6.2</version>
                 <executions>
                     <execution>
                         <id>enforce-maven-version</id>
@@ -37,7 +52,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>[3.9.9,)</version>
+                                    <version>[3.9.11,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
                                     <version>[17,)</version>
@@ -51,35 +66,30 @@
                 <!-- FIDO depends on Ed25519 keys, thus targeting JDK17+ -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-compile</id>
-                        <configuration>
-                            <!-- compile everything to ensure module-info contains right entries -->
-                            <release>17</release>
-                            <compilerArgs combine.children="append">
-                                <arg>-Werror</arg>
-                                <arg>-Xlint:all</arg>
-                            </compilerArgs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>base-compile</id>
-                        <configuration>
-                            <!-- compile everything to ensure module-info contains right entries -->
-                            <release>17</release>
-                            <compilerArgs combine.children="append">
-                                <arg>-Werror</arg>
-                                <arg>-Xlint:all</arg>
-                            </compilerArgs>
-                        </configuration>
-                    </execution>
-                </executions>
+                <version>3.14.1</version>
+                <configuration>
+                    <!-- compile everything to ensure module-info contains right entries -->
+                    <release>17</release>
+                    <compilerArgs combine.children="append">
+                        <arg>-Werror</arg>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.9.8.2</version>
+                <executions>
+                    <execution>
+                        <id>parent-spotbugs</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <excludeFilterFile>spotbugs.xml</excludeFilterFile>
                 </configuration>
