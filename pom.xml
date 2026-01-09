@@ -10,8 +10,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- GH Actions fails sometimes on first try -->
-        <maven.wagon.http.retryHandler.count>2</maven.wagon.http.retryHandler.count>
         <project.build.outputTimestamp>2025-10-19T10:45:58Z</project.build.outputTimestamp>
     </properties>
     <repositories>
@@ -20,30 +18,12 @@
             <url>https://mvn.javacard.pro/maven/</url>
         </repository>
     </repositories>
-    <!-- Default is publishing to private Maven repo on mvn.javacard.pro -->
-    <distributionManagement>
-        <repository>
-            <id>javacard</id>
-            <url>scpexe://mvn@mvn.javacard.pro/home/mvn/maven/</url>
-        </repository>
-        <snapshotRepository>
-            <id>javacard</id>
-            <url>scpexe://mvn@mvn.javacard.pro/home/mvn/maven/SNAPSHOTS</url>
-        </snapshotRepository>
-    </distributionManagement>
     <modules>
         <module>common</module>
         <module>transports</module>
         <module>tool</module>
     </modules>
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh-external</artifactId>
-                <version>3.5.3</version>
-            </extension>
-        </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
