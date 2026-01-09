@@ -47,7 +47,7 @@
         <dependency>
             <groupId>com.github.martinpaljak</groupId>
             <artifactId>globalplatformpro</artifactId>
-            <version>25.11.24.1</version>
+            <version>25.12.01</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -142,7 +142,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>2.6.0</version>
+                        <version>2.7.0</version>
                         <executions>
                             <execution>
                                 <id>fido-exe</id>
