@@ -24,11 +24,12 @@
         <module>tool</module>
     </modules>
     <build>
+        <defaultGoal>clean verify</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.6.3</version>
                 <executions>
                     <execution>
                         <id>enforce-maven-version</id>
@@ -39,10 +40,10 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>[3.9.12,)</version>
+                                    <version>[3.9.16,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>[17,)</version>
+                                    <version>[21,)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
@@ -50,13 +51,13 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- FIDO depends on Ed25519 keys, thus targeting JDK17+ -->
+                <!-- Ed25519 keys need JDK15+; build targets JDK21 LTS -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <!-- compile everything to ensure module-info contains right entries -->
-                    <release>17</release>
+                    <release>21</release>
                     <compilerArgs combine.children="append">
                         <arg>-Werror</arg>
                         <arg>-Xlint:all</arg>
@@ -67,7 +68,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.9.8.2</version>
+                <version>4.10.2.0</version>
                 <executions>
                     <execution>
                         <id>parent-spotbugs</id>

@@ -22,7 +22,7 @@ public class NFCTransport extends ISO7816Transport {
 
     public static NFCTransport getInstance(String readerName) {
         TerminalManager manager = TerminalManager.getDefault();
-        return getInstance(manager.getTerminal(readerName));
+        return getInstance(manager.terminal(readerName));
     }
 
     public static NFCTransport getInstance(CardTerminal terminal) {

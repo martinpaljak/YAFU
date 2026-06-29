@@ -22,7 +22,7 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v5
         with:
-          java-version: 17
+          java-version: 21
           distribution: zulu
           cache: maven
       - name: Compile and verify
@@ -37,7 +37,7 @@ jobs:
       - name: Release
         if: startsWith(github.ref, 'refs/tags/v')
         id: create_release
-        uses: softprops/action-gh-release@v2.4.2
+        uses: softprops/action-gh-release@v3.0.1
         with:
           files: |
             tool/target/yafu.jar
